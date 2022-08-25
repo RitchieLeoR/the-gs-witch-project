@@ -18,6 +18,9 @@ public class CalculatorHelper {
     @Autowired
     private PrimeNumberGenerator primeGenerator;
 
+    @Value("${null.value.message}")
+    private String nullValueMessage;
+
     @Value("${negative.value.message}")
     private String negativeValueMessage;
 
@@ -30,7 +33,10 @@ public class CalculatorHelper {
     @SneakyThrows
     public ResponseDTO<ResultDTO> calculate(RequestDTO dto) {
 
-        if(validator.negativeChecker(dto) == false) {
+        if(validator.nullChecker(dto) == false) {
+            return new ResponseDTO().errorResponse(nullValueMessage, new ResultDTO(null, null,  (double) -1));
+        }
+        else if(validator.negativeChecker(dto) == false) {
             return new ResponseDTO().errorResponse(negativeValueMessage, new ResultDTO(null, null,  (double) -1));
         } else {
 

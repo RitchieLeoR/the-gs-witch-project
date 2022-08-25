@@ -15,6 +15,15 @@ public class CalculatorValidator {
         }
     }
 
+    public boolean nullChecker(RequestDTO dto) {
+
+        if(dto.getAgeOfDeathA() == null || dto.getYearOfDeathA() == null || dto.getAgeOfDeathB() == null || dto.getYearOfDeathB() == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public boolean birthYearChecker(Integer a, Integer b) {
 
         if((b-a) <= 0) {
